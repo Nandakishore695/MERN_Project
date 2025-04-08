@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+clientSide_Application/node_modules/
+serverSide_Application/node_modules/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+clientSide_Application/.env
+serverSide_Application/.env
+
+# Build folders
+clientSide_Application/dist/
