@@ -4,8 +4,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-    const [userEntery, setUserEntery] = useState({name: "", email: "", password: "", re_password: ""});
+    const [userEntery, setUserEntery] = useState({ name: "", email: "", password: "", re_password: "" });
     const navigator = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
+
     const handleInput = (event) => {
         const { name, value } = event.target;
         setUserEntery({
@@ -22,20 +24,19 @@ function Register() {
             toast.error("Please Enter All Fields")
             return;
         }
-        else if(userEntery.password !== userEntery.re_password) {
+        else if (userEntery.password !== userEntery.re_password) {
             toast.error("Password and Re-Password Not Matched")
             return;
         }
         else {
             try {
-               const response =  await axios.post("/api/user/register", userEntery, {
-                    headers: { "Content-Type": "application/json" },
-                });
-                if(response.data.success === true) {
+                const response = await axios.post(`${apiUrl}/user/register`, userEntery, { headers: { "Content-Type": "application/json" } },
+                    { withCredentials: true });
+                if (response.data.success === true) {
                     toast.success(response.data.message);
                     navigator("/");
                 }
-                else{
+                else {
                     toast.error(response.data.message);
                 }
             } catch (error) {

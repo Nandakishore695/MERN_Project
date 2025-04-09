@@ -1,30 +1,34 @@
 import express from "express";
 import bodyParser from "express";
 import mongoose from "mongoose";
-// import cors from "cors"
+import cors from "cors";
+import dotenv from "dotenv";
 import userRouter from "./Routes/UserRoutes.js";
 import productRoutes from "./Routes/ProductsRoutes.js";
 import cardRouters from "./Routes/CartRoutes.js";
 import shippingAddressRouters from "./Routes/ShippingAddressRoutes.js";
+
 const application = express();
-const portNumber = 3300;
 application.use(bodyParser.json());
+dotenv.config();
+
 
 // Start Server
-application.listen(portNumber, () => { console.log(`Server started on port ${portNumber}`); });
+application.listen(process.env.PORT_NUMBE, () => { console.log(`Server started on port ${process.env.PORT_NUMBE}`); });
 
 // MongoDB Connection
-mongoose.connect("mongodb+srv://nandakishore695:01VPoISZnpi1cEHq@cluster0.gqpse.mongodb.net/", { dbName: "Mern_E-Commerce" })
+mongoose.connect(process.env.MONGOOSE_CONNECTION_URL, { dbName: "Mern_E-Commerce" })
   .then(() => { console.log("Mongoose Connected"); })
   .catch((error) => { console.log("MongoDB Connection Error:", error); });
+
+// const corsOptions = 
+application.use(cors({
+  origin: true,          
+  methods: ['GET', "POST",],
+}));
 
 application.get("/", (req, res) => { res.send("<h1>Welcome To Server</h1>") });
 application.use("/api/user", userRouter);
 application.use("/api/product", productRoutes);
 application.use("/api/carts", cardRouters);
 application.use("/api/shippingAddress", shippingAddressRouters);
-// application.use(cors({
-//   origin: true,
-//   methods: ["PUT", "GET", "POST", "DELETE"],
-//   credentials: true
-// }))

@@ -9,6 +9,8 @@ function Login() {
     const [userEntery, setUserEntery] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
+
     const handleInput = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -23,9 +25,8 @@ function Login() {
         }
         else {
             try {
-                const response = await axios.post("/api/user/login", userEntery, {
-                    headers: { "Content-Type": "application/json" },
-                })
+                const response = await axios.post(`${apiUrl}/user/login`, userEntery, { headers: { "Content-Type": "application/json" } },
+                    { withCredentials: true })
                 if (response.data.success === true) {
                     dispatch(login());
                     toast.success(response.data.message);

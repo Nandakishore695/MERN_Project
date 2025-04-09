@@ -4,6 +4,8 @@ import { cartAdd } from "../redux/slice.jsx"
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+// import dotenv from "dotenv";
+// dotenv.config();
 
 function Product() {
     const [apiData, setApiData] = useState([]);
@@ -11,6 +13,7 @@ function Product() {
     const dispatch = useDispatch();
     const count = useSelector((state) => state.login?.value);
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
     useEffect(() => {
         getProduct();
@@ -30,20 +33,20 @@ function Product() {
 
     const getProduct = async () => {
         try {
-            const apiResponse = await axios.get("/api/product/all");
+            const apiResponse = await axios.get(`${apiUrl}/product/all `, { headers: { "Content-Type": "application/json" } },
+                { withCredentials: true });
             setApiData(apiResponse.data);
         } catch (error) {
-            console.log(error.response.data.message);
+            // console.log(error.response.data.message);
         }
     }
 
     const handleAddCart = async (item) => {
         try {
-            const apiResponse = await axios.post(`/api/carts/add`, item, {
-                headers: { "Content-Type": "application/json" }
-            });
-
-
+            const apiResponse = await axios.post(`${apiUrl}/carts/add`, item, { headers: { "Content-Type": "application/json" } },
+                { withCredentials: true });
+            console.log(apiResponse);
+            
         } catch (error) {
             console.log(error);
         }

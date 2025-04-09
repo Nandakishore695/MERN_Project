@@ -9,8 +9,8 @@ const Cart = () => {
     const cart = useSelector((state) => state.login?.cartValue);
     const [apiData, setApiData] = useState([]);
     const [apiDataLength, setCartDataLength] = useState(null);
-
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
     useEffect(() => {
         getCarts();
@@ -18,7 +18,8 @@ const Cart = () => {
 
     const getCarts = async () => {
         try {
-            const apiResponse = await axios.get(`/api/carts/getCart`);
+            const apiResponse = await axios.get(`${apiUrl}/carts/getCart`,{ headers: { "Content-Type": "application/json" } },
+                { withCredentials: true });
             setApiData(apiResponse.data);
             setCartDataLength(apiResponse.data.length);
         } catch (error) {
@@ -32,7 +33,12 @@ const Cart = () => {
 
     const handleDeleteCart = async (id) => {
         try {
-            const response = await axios.delete(`/api/carts/deleteCart/${id}`);
+            const response = await axios.delete(`${apiUrl}/carts/deleteCart/${id}`, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                withCredentials: true,
+              });
             if (response.data.success === true) {
                 toast.success(response.data.message);
                 getCarts();

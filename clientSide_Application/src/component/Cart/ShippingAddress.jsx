@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 const ShippingAddress = () => {
     const [userEntery, setUserEntery] = useState({ name: "", country: "", state: "", city: "", postalCode: "", phone: "", address: "" });
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
     const handleInput = (event) => {
         const { name, value } = event.target;
@@ -20,9 +21,8 @@ const ShippingAddress = () => {
         }
         else {
             try {
-                const response = await axios.post("/api/shippingAddress/add", userEntery, {
-                    headers: { "Content-Type": "application/json" }
-                });
+                const response = await axios.post(`${apiUrl}/shippingAddress/add`, userEntery, { headers: { "Content-Type": "application/json" } },
+                    { withCredentials: true });
                 if (response.data.success === true) {
                     toast.success(response.data.message);
                     navigate("/checkoutAddress");

@@ -5,7 +5,7 @@ import { useParams } from "react-router"
 const ViewProduct = () => {
   const [apiData, setApiData] = useState({});
   let params = useParams();
-
+  const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
   useEffect(() => {
     getProductById();
@@ -13,7 +13,8 @@ const ViewProduct = () => {
 
   const getProductById = async () => {
     try {
-      const apiResponse = await axios.get(`/api/product/${params.id}`);
+      const apiResponse = await axios.get(`${apiUrl}/product/${params.id}`, { headers: { "Content-Type": "application/json" } },
+        { withCredentials: true });
       setApiData(apiResponse.data);
     } catch (error) {
       console.log(error);
