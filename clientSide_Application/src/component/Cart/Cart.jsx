@@ -58,11 +58,11 @@ const Cart = () => {
             {apiData?.map((item, index) => {
                 return <div className='d-flex bg-success justify-content-center align-items-center p-3 rounded my-3 shadow bg-opacity-10' key={index}>
                     <div>
-                        <img src={item.image} width={200} className='rounded' />
+                        <img src={item?.image} width={200} className='rounded' />
                     </div>
                     <div>
-                        <p className='fs-4 p-2'>{item.description}</p>
-                        <p className='fs-4 p-2'>₹ {item.price}</p>
+                        <p className='fs-4 p-2'>{item?.description}</p>
+                        <p className='fs-4 p-2'>₹ {item?.price}</p>
                     </div>
                     <div>
                         <button className="btn bg-warning p-2 mx-3">Qty--</button>

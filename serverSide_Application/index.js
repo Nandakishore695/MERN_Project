@@ -5,7 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import userRouter from "./Routes/UserRoutes.js";
 import productRoutes from "./Routes/ProductsRoutes.js";
-import cardRouters from "./Routes/CartRoutes.js";
+import cartRouters from "./Routes/CartRoutes.js";
 import shippingAddressRouters from "./Routes/ShippingAddressRoutes.js";
 
 const application = express();
@@ -24,11 +24,12 @@ mongoose.connect(process.env.MONGOOSE_CONNECTION_URL, { dbName: "Mern_E-Commerce
 // const corsOptions = 
 application.use(cors({
   origin: true,          
-  methods: ['GET', "POST",],
+  methods: ['GET', "POST", "DELETE"],
+  credentials: true
 }));
 
 application.get("/", (req, res) => { res.send("<h1>Welcome To Server</h1>") });
 application.use("/api/user", userRouter);
 application.use("/api/product", productRoutes);
-application.use("/api/carts", cardRouters);
+application.use("/api/carts", cartRouters);
 application.use("/api/shippingAddress", shippingAddressRouters);

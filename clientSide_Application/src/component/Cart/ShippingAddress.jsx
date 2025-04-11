@@ -45,27 +45,27 @@ const ShippingAddress = () => {
             <form className='row' onSubmit={handleAddressCollect}>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUserName" className="form-label">Name</label>
-                    <input className="form-control" type="email" id="shippingUserName" name='name' aria-describedby="emailHelp" autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="text" id="shippingUserName" name='name' aria-describedby="emailHelp" autoComplete="off" onChange={handleInput} />
                 </div>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUserCountry" className="form-label">Country</label>
-                    <input className="form-control" type="password" id="shippingUserCountry" name='country' autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="text" id="shippingUserCountry" name='country' autoComplete="off" onChange={handleInput} />
                 </div>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUsereState" className="form-label">State</label>
-                    <input className="form-control" type="password" id="shippingUsereState" name='state' autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="text" id="shippingUsereState" name='state' autoComplete="off" onChange={handleInput} />
                 </div>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUserCity" className="form-label">City</label>
-                    <input className="form-control" type="password" id="shippingUserCity" name='city' autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="text" id="shippingUserCity" name='city' autoComplete="off" onChange={handleInput} />
                 </div>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUserPostalCode" className="form-label">Postal Code</label>
-                    <input className="form-control" type="password" id="shippingUserPostalCode" name='postalCode' autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="text" id="shippingUserPostalCode" name='postalCode' autoComplete="off" onChange={handleInput} />
                 </div>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUserPhoneNumber" className="form-label">PhoneNumber</label>
-                    <input className="form-control" type="password" id="shippingUserPhoneNumber" name='phone' autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="text"  maxLength="10" id="shippingUserPhoneNumber" name='phone' autoComplete="off" onChange={handleInput} />
                 </div>
                 <div className="col-xl-3 mb-3">
                     <label htmlFor="shippingUserAddress" className="form-label">Address</label>

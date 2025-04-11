@@ -1,9 +1,9 @@
 import React from 'react'
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate, Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from './component/redux/slice';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { FaSearch, FaCartPlus } from "react-icons/fa";
 function Layout() {
     const count = useSelector((state) => state.login?.value);
     const cart = useSelector((state) => state.login?.cartValue);
@@ -18,9 +18,9 @@ function Layout() {
 
     return (
         <>
-            <header className=' container-fluid bg-success'>
+            {/* <header className=' container-fluid bg-success'>
                 <Toaster position="top-center" reverseOrder={false} />
-                <nav className='navbar navbar-expand-lg' >
+                <nav className='navbar navbar-expand-lg navbar-light shadow-sm' >
 
                     <ul className='container d-flex list-unstyled text-decoration-none mt-2 '>
                         <li className='fs-2'><NavLink to="/product" className='text-white text-decoration-none fw-bold' > <span className='text-black'>MERN.</span> E-Commerce</NavLink></li>
@@ -38,7 +38,65 @@ function Layout() {
                         }
                     </ul>
                 </nav>
-            </header>
+            </header> */}
+
+            <nav className="navbar navbar-expand-lg navbar-light bg-success shadow-sm">
+                <div className="container">
+                    <Toaster position="top-center" reverseOrder={false} />
+                    <NavLink to="/product" className='text-white text-decoration-none fw-bold fs-2' > <span className='text-black'>MERN.</span> E-Commerce</NavLink>
+
+                    {/* Mobile Toggle Button */}
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <form
+                            className="d-flex mx-auto my-2 my-lg-0 w-50"
+
+                        >
+                            <input
+                                type="search"
+                                className="form-control"
+                                placeholder="Search for products"
+                                name='search'
+                            />
+                            <button className="btn btn-outline-light  ms-2" type="submit">
+                                <FaSearch />
+                            </button>
+                        </form>
+
+                        <div className="d-flex align-items-center">
+                            {!count ? <>
+                                <NavLink to="/login" className="btn btn-light  mx-2" >
+                                    Login
+                                </NavLink>
+                                <NavLink to="/register" className="btn btn-light  mx-2">
+                                    Register
+                                </NavLink>
+                            </> :
+                                <>
+                                    <NavLink to="/cart" className="btn btn-light  mx-2">
+                                    <FaCartPlus />
+
+                                    </NavLink>
+                                    <button  className="btn btn-light  mx-2" onClick={handleProfile}>
+                                    Profile
+                                    </button>
+                                    <button className="btn btn-light  mx-2" onClick={handleLogout}>
+                                    Logout
+                                    </button>
+                                </>}
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </>
     )
 }
