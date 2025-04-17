@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
+import { decrementQuantity } from '../ReducComponent/feature/acrtSlice';
+import { useDispatch } from "react-redux";
 
 const Cart = () => {
-    const cart = useSelector((state) => state.login?.cartValue);
     const [apiData, setApiData] = useState([]);
     const [apiDataLength, setCartDataLength] = useState(null);
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
+    const dispatch = useDispatch();
 
     useEffect(() => {
         getCarts();
@@ -18,10 +18,11 @@ const Cart = () => {
 
     const getCarts = async () => {
         try {
-            const apiResponse = await axios.get(`${apiUrl}/carts/getCart`,{ headers: { "Content-Type": "application/json" } },
+            const apiResponse = await axios.get(`${apiUrl}/carts/getCart`, { headers: { "Content-Type": "application/json" } },
                 { withCredentials: true });
             setApiData(apiResponse.data);
             setCartDataLength(apiResponse.data.length);
+
         } catch (error) {
             console.log(error);
         }
@@ -35,12 +36,13 @@ const Cart = () => {
         try {
             const response = await axios.delete(`${apiUrl}/carts/deleteCart/${id}`, {
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 withCredentials: true,
-              });
+            });
             if (response.data.success === true) {
                 toast.success(response.data.message);
+                dispatch(decrementQuantity(id));
                 getCarts();
             }
         } catch (error) {

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
-import { login } from "../redux/slice.jsx"
 import { useNavigate } from "react-router";
+import { useDispatch } from 'react-redux';
+import { login } from '../ReducComponent/feature/authSlice';
 
 function Login() {
     const [userEntery, setUserEntery] = useState({ email: "", password: "" });
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
+    const dispatch = useDispatch();
 
     const handleInput = (event) => {
         const name = event.target.name;
@@ -28,15 +28,15 @@ function Login() {
                 const response = await axios.post(`${apiUrl}/user/login`, userEntery, { headers: { "Content-Type": "application/json" } },
                     { withCredentials: true })
                 if (response.data.success === true) {
-                    dispatch(login());
                     toast.success(response.data.message);
                     navigate("/product");
+                    dispatch(login())
                 }
                 else {
                     toast.error(response.data.message);
                 }
             } catch (error) {
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
             }
         }
     };

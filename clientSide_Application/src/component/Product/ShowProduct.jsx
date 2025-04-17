@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { cartAdd } from "../redux/slice.jsx"
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { useDispatch } from "react-redux";
 import axios from 'axios';
-// import dotenv from "dotenv";
-// dotenv.config();
+import { incrementQuantity } from '../ReducComponent/feature/acrtSlice';
 
 function Product() {
-    const [apiData, setApiData] = useState([]);
-    const [cartData, setCartData] = useState([])
-    const dispatch = useDispatch();
-    const count = useSelector((state) => state.login?.value);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [apiData, setApiData] = useState([]);
     const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
     useEffect(() => {
         getProduct();
-    }, [])
-
-    // const handleAddCart = (item) => {
-    //     if (count) {
-    //         dispatch(cartAdd())
-    //     setCartData(item)
-
-    //     }
-    // }
+    }, []);
 
     const handleViewProduct = (id) => {
         navigate(`/product/${id}`)
@@ -41,12 +29,14 @@ function Product() {
         }
     }
 
-    const handleAddCart = async (item) => {
+    const handleAddCart = async (item) => {       
         try {
             const apiResponse = await axios.post(`${apiUrl}/carts/add`, item, { headers: { "Content-Type": "application/json" } },
                 { withCredentials: true });
-            console.log(apiResponse);
-            
+            toast.success("Item Added");
+            console.log(apiResponse.data.length);
+            dispatch(incrementQuantity(item._id));
+
         } catch (error) {
             console.log(error);
         }
