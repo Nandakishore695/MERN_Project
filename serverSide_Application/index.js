@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGOOSE_CONNECTION_URL, { dbName: "Mern_E-Commerce
 
 // const corsOptions = 
 application.use(cors({
-  origin: true,          
+  origin: true,
   methods: ['GET', "POST", "DELETE"],
   credentials: true
 }));

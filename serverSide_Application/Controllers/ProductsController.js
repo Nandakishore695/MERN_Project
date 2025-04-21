@@ -4,9 +4,9 @@ export const product = async (req, res) => {
     const { name, description, price, image } = req.body;
     try {
         await Product.create({ name, description, price, image });
-        res.json({ message: "A New Product Saved!" })
+        res.json({ message: "A New Product Saved!", success: true })
     } catch (error) {
-        res.json({ message: error.message })
+        res.json({ message: error.message, success: false  })
     }
 }
 

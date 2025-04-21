@@ -2,18 +2,23 @@ import React from 'react'
 import { NavLink, useNavigate, Link } from "react-router";
 import toast, { Toaster } from 'react-hot-toast';
 import { FaSearch, FaCartPlus } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from './component/ReducComponent/feature/authSlice';
 
 function Layout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = useSelector(state => state.cart.cartItems.length);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogout = () => {
         toast('Successfully Logout!', { icon: '👏', });
+        dispatch(logout())
+        navigate("/")
+
     }
     const handleProfile = () => { navigate("/profile") }
+    const handleAdmin = () => { navigate("/admin") }
 
     return (
         <>
@@ -59,7 +64,8 @@ function Layout() {
                                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{cartItems}</span>
                                 </NavLink>
                                 <button className="btn btn-light  mx-2" onClick={handleProfile}>Profile</button>
-                                <button className="btn btn-light  mx-2" onClick={handleLogout}>Logout</button></>}
+                                <button className="btn btn-light  mx-2" onClick={handleLogout}>Logout</button>
+                                <button className="btn btn-light  mx-2" onClick={handleAdmin}>Admin Dashboard</button></>}
                         </div>
                     </div>
                 </div>

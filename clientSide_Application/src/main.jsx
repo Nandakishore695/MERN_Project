@@ -14,6 +14,9 @@ import CheckoutAddress from './component/Cart/CheckoutAddress.jsx';
 import UserProfile from './component/User/UserProfile.jsx';
 import ViewProduct from './component/Product/ViewProduct.jsx';
 import { store } from './component/ReducComponent/store.jsx';
+import Admin from './admin/admin.jsx';
+import AllUser from './admin/AllUser.jsx';
+import AddProduct from './admin/AddProduct.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -29,6 +32,9 @@ createRoot(document.getElementById('root')).render(
         <Route path="cart" element={<Cart />} />
         <Route path="shippingAddress" element={<ShippingAddress />} />
         <Route path="checkoutAddress" element={<CheckoutAddress />} />
+        <Route path="admin" element={<Admin />} />
+        <Route path="admin/alluser" element={<AllUser />} />
+        <Route path="admin/addproduct" element={<AddProduct />} />
       </Routes>
     </BrowserRouter>
   </Provider>

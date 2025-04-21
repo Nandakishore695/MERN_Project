@@ -13,22 +13,24 @@ export const cartAdd = async (req, res) => {
 export const cartGet = async (req, res) => {
     try {
         const response = await Cart.find();
+        console.log(response);
+
         res.json(response)
     } catch (error) {
         res.json({ message: error.message })
     }
 }
 
-export const cartDelete = async (req, res) =>{
+export const cartDelete = async (req, res) => {
     const { id } = req.params;
     try {
         await Cart.findByIdAndDelete(id);
-        res.json({message: "A Product Remove!", success: true})
+        res.json({ message: "A Product Remove!", success: true })
     }
     catch (error) {
         res.json({ message: error.message })
     }
-}  
+}
 
 export const cartClearAll = async (req, res) => {
 

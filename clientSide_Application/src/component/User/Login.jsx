@@ -25,8 +25,11 @@ function Login() {
         }
         else {
             try {
-                const response = await axios.post(`${apiUrl}/user/login`, userEntery, { headers: { "Content-Type": "application/json" } },
-                    { withCredentials: true })
+                const response = await axios.post(`${apiUrl}/user/login`, userEntery,
+                    { headers: { "Content-Type": "application/json" },
+                
+                withCredentials:true},
+                    )
                 if (response.data.success === true) {
                     toast.success(response.data.message);
                     navigate("/product");
@@ -48,11 +51,11 @@ function Login() {
             <form onSubmit={handleLogin}>
                 <div className="mb-3">
                     <label htmlFor="loginUserName" className="form-label">Email address</label>
-                    <input className="form-control" type="email" id="loginUserName" name='email' aria-describedby="emailHelp" autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="email" id="loginUserName" name='email' aria-describedby="emailHelp" onChange={handleInput} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="loginUserPassword" className="form-label">Password</label>
-                    <input className="form-control" type="password" id="loginUserPassword" name='password' autoComplete="off" onChange={handleInput} />
+                    <input className="form-control" type="password" id="loginUserPassword" name='password' onChange={handleInput} />
                 </div>
                 <button type="submit" className="btn bg-success text-white">Login</button>
             </form>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { decrementQuantity } from '../ReducComponent/feature/acrtSlice';
+import { decrementQuantity, incrementQuantity } from '../ReducComponent/feature/acrtSlice';
 import { useDispatch } from "react-redux";
 
 const Cart = () => {
@@ -22,6 +22,7 @@ const Cart = () => {
                 { withCredentials: true });
             setApiData(apiResponse.data);
             setCartDataLength(apiResponse.data.length);
+            dispatch(incrementQuantity(apiResponse.data.length))
 
         } catch (error) {
             console.log(error);

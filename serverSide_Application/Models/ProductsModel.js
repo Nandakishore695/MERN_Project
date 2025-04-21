@@ -5,5 +5,6 @@ const productsSchema = new mongoose.Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     image: { type: String, required: true },
+    createDate: { type: Date, default: Date.now},
 });
 export const Product = mongoose.model("Product", productsSchema);

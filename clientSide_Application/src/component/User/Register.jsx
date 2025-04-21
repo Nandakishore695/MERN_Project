@@ -21,11 +21,11 @@ function Register() {
     const handleRegister = async (event) => {
         event.preventDefault();
         if (!userEntery.name && !userEntery.email && !userEntery.password && !userEntery.re_password) {
-            toast.error("Please Enter All Fields")
+            toast.error("Please Enter All Fields");
             return;
         }
         else if (userEntery.password !== userEntery.re_password) {
-            toast.error("Password and Re-Password Not Matched")
+            toast.error("Password and Re-Password Not Matched");
             return;
         }
         else {

@@ -36,7 +36,6 @@ function Product() {
             toast.success("Item Added");
             console.log(apiResponse.data.length);
             dispatch(incrementQuantity(item._id));
-
         } catch (error) {
             console.log(error);
         }

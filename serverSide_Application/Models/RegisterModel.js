@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const userRegisterSchema = new mongoose.Schema({ 
     name:{type: String , required: true},
+    role: {type: String, default: "user"},
     email:{type: String , required: true},
     password:{type: String , required: true},
     re_password:{type: String , required: true},
