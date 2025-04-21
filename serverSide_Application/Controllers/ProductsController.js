@@ -6,7 +6,7 @@ export const product = async (req, res) => {
         await Product.create({ name, description, price, image });
         res.json({ message: "A New Product Saved!", success: true })
     } catch (error) {
-        res.json({ message: error.message, success: false  })
+        res.json({ message: error.message, success: false })
     }
 }
 
@@ -20,10 +20,31 @@ export const getProduct = async (req, res) => {
 }
 
 export const getProductById = async (req, res) => {
-    const { id } = req.params;   
+    const { id } = req.params;
     try {
         const response = await Product.findById(id);
         res.json(response)
-    } catch (error) {console.log(error);}
+    } catch (error) { console.log(error); }
 
+}
+
+export const updateProduct = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const response = await Product.findByIdAndUpdate(id, req.body);
+
+        res.json({ message: "Product has been updated", success: true, response })
+    } catch (error) {
+        res.json({ message: error.message, success: false })
+    }
+}
+
+export const deleteProduct = async (req, res) => {
+    const id = req.params.id
+    try {
+        const response = await Product.findByIdAndDelete(id);
+        res.json({ message: "Product Removed from list", success: true, response })
+    } catch (error) {
+        res.json({ message: error.message, success: false })
+    }
 }

@@ -10,3 +10,12 @@ export const shippingAddressAdd = async (req, res) => {
         res.json({ message: error.message, success: false });
     }
 }
+
+export const getUserAddress = async (req, res) => {
+    try {
+        const response = await ShippingAddress.find();
+        res.json({ message: "old userAddress", success: true, response })
+    } catch (error) {
+        res.json({ message: error.message, success: false })
+    }
+}

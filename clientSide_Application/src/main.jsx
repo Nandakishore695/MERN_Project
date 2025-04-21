@@ -16,7 +16,7 @@ import ViewProduct from './component/Product/ViewProduct.jsx';
 import { store } from './component/ReducComponent/store.jsx';
 import Admin from './admin/admin.jsx';
 import AllUser from './admin/AllUser.jsx';
-import AddProduct from './admin/AddProduct.jsx';
+import AddProduct from './admin/CurdProduct.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

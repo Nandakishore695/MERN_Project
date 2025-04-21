@@ -12,14 +12,9 @@ const Admin = () => {
       navigate("/admin/addproduct")
 
     }
-    else if (type === "product") {
-      navigate("/admin/addproduct")
-
-    }
   }
   return (
     <div>
-      <button onClick={() => handleUserList("product")}>All Product</button>
       <button onClick={() => handleUserList("addproduct")}>Amin Add Product</button>
       <button onClick={() => handleUserList("allUser")}>All User Detail</button>
     </div>
