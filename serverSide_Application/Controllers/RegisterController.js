@@ -34,7 +34,7 @@ export const login = async (req, res) => {
     else {
       const token = jwt.sign({ _id: UserRegister._id }, process.env.JWT_SECRET_KEY, { expiresIn: "3d" });
       res.cookie("token", token, {
-        httpOnly: true,
+        httpOnly: true, 
         // secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days

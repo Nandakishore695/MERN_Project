@@ -51,6 +51,24 @@ const Cart = () => {
         }
     }
 
+    
+    const handleClearCart = async () => {
+        try {
+            const response = await axios.delete(`${apiUrl}/carts/clearAll`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+            if (response.data.success === true) {
+                toast.success(response.data.message);
+               
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className='container text-center mt-5 w-50 '>
             <Toaster position="top-center" reverseOrder={false} />
@@ -76,7 +94,7 @@ const Cart = () => {
                 </div>
             })}
             {apiDataLength !== 0 && <><button className="btn bg-success text-white m-3" onClick={handleCheckout} >Checkout</button>
-                <button className="btn btn-danger">Clear Cart</button></>}
+                <button className="btn btn-danger" onClick={handleClearCart}>Clear Cart</button></>}
 
         </div >
     )

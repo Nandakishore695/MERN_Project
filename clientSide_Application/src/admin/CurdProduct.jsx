@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,13 +7,26 @@ import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 const AddProduct = () => {
     const [userEntery, setUserEntery] = useState({ name: "", description: "", price: "", image: "" });
     const [rowData, setRowData] = useState([]);
-    const [colDefs] = useState([{ field: "boolean"},{ field: "name" }, { field: "description" }, { field: "price" }, { field: "image" }, { field: "createDate" },{field: "Actions"}]);
+    const [colDefs] = useState([{ field: "name" }, { field: "description" }, { field: "price" }, { field: "image" }, { field: "createDate" }, { field: "Actions" }]);
     const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
     const navigator = useNavigate();
     ModuleRegistry.registerModules([AllCommunityModule]);
 
     useEffect(() => {
         getProduct();
+    }, []);
+
+    const rowSelection = useMemo(() => {
+        return { mode: "multiRow" };
+    }, []);
+
+    const defaultColDef = useMemo(() => {
+        return {
+            flex: 1,
+            editable: true,
+            filter: true,
+            enableCellChangeFlash: true,
+        };
     }, []);
 
     const handleInput = (event) => {
@@ -44,12 +57,13 @@ const AddProduct = () => {
         }
     }
 
-   
+
     return (
         <>
-            <section>
+            <section className='container mt-5 p-3 rounded w-25 border shadow'>
+                <h1 className='text-center'>Add Product</h1>
                 <Toaster position="top-center" reverseOrder={false} />
-                <form onSubmit={handleAddProduct} className='w-75 d-flex'>
+                <form onSubmit={handleAddProduct}>
                     <div className="mb-3">
                         <label htmlFor="productName" className="form-label">Product Name</label>
                         <input className="form-control" type="text" id="productName" name='name' onChange={handleInput} />
@@ -64,15 +78,18 @@ const AddProduct = () => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="productImageUrl" className="form-label">Image Url</label>
-                        <input className="form-control" type="password" id="productImageUrl" name='image' onChange={handleInput} />
+                        <input className="form-control" type="url" id="productImageUrl" name='image' onChange={handleInput} />
                     </div>
-                    <button type="submit" className="btn bg-success text-white">Add A Product</button>
+                    <button type="submit" className="btn bg-success text-white">Create Product</button>
                 </form>
             </section>
-            <section style={{ height: 500, width: 1820 }}>
+
+            <section className='container-fluid w-75 py-5' style={{ height: 400, }}>
                 <AgGridReact
                     rowData={rowData}
                     columnDefs={colDefs}
+                    rowSelection={rowSelection}
+                    defaultColDef={defaultColDef}
                 />
             </section>
         </>

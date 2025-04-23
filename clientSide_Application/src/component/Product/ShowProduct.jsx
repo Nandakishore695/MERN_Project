@@ -29,9 +29,17 @@ function Product() {
         }
     }
 
-    const handleAddCart = async (item) => {       
+    const handleAddCart = async (item) => {
+        const items = {
+            productId: item._id,
+            name:item.name,
+            description:item.description,
+            price:item.price,
+            image:item.image,
+        }
+
         try {
-            const apiResponse = await axios.post(`${apiUrl}/carts/add`, item, { headers: { "Content-Type": "application/json" } },
+            const apiResponse = await axios.post(`${apiUrl}/carts/cartAdd`, items,  { headers: { "Content-Type": "application/json" } },
                 { withCredentials: true });
             toast.success("Item Added");
             console.log(apiResponse.data.length);
