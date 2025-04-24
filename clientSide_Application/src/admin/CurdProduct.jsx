@@ -37,15 +37,27 @@ const AddProduct = () => {
     const handleAddProduct = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`${apiUrl}/product/add`, userEntery, { headers: { "Content-Type": "application/json" } }, { withCredentials: true });
+            const response = await axios.post(
+                `${apiUrl}/product/add`,
+                userEntery,
+                {
+                    headers: {
+                       
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    },
+                    withCredentials: true
+                }
+            );
+    
             if (response.data.success === true) {
                 toast.success(response.data.message);
-                navigator("/");
+                navigate("/"); // fixed typo: navigator → navigate
             }
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.response?.data?.message || error.message);
         }
-    }
+    };
+    
 
     const getProduct = async () => {
         try {

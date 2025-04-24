@@ -28,7 +28,6 @@ application.use(cors({
   credentials: true
 }));
 
-application.get("/", (req, res) => { res.send("<h1>Welcome To Server</h1>") });
 application.use("/api/user", userRouter);
 application.use("/api/product", productRoutes);
 application.use("/api/carts", cartRouters);

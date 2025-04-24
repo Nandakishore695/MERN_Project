@@ -26,18 +26,18 @@ function Login() {
         else {
             try {
                 const response = await axios.post(`${apiUrl}/user/login`, userEntery,
-                    { headers: { "Content-Type": "application/json" },
-                
-                withCredentials:true},
-                    )
-                if (response.data.success === true) {
-                    toast.success(response.data.message);
-                    navigate("/product");
-                    dispatch(login())
-                }
-                else {
-                    toast.error(response.data.message);
-                }
+                    {headers: { "Content-Type": "application/json" },withCredentials: true},
+                )
+                if (response.data.success === true)
+                    if (response.data.token) {
+                        localStorage.setItem("token", response.data.token);
+                        toast.success(response.data.message);
+                        navigate("/product");
+                        dispatch(login())
+                    }
+                    else {
+                        toast.error(response.data.message);
+                    }
             } catch (error) {
                 // toast.error(error.response.data.message);
             }
