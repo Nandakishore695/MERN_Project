@@ -45,7 +45,7 @@ function Login() {
     };
 
     return (
-        <div className='container mt-5 p-3 rounded w-25 border shadow'>
+        <div className='container-xl mt-5 p-3 rounded w-25 border shadow'>
             <h1 className='text-center'>User Login</h1>
             <Toaster position="top-center" reverseOrder={false} />
             <form onSubmit={handleLogin}>

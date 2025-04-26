@@ -3,7 +3,7 @@ import { deleteProduct, getProduct, getProductById, product, updateProduct } fro
 import { Authenticate } from "../Middlewares/Auth.js";
 
 const router = express.Router();
-router.post("/add", Authenticate, product);
+router.post("/add", product);
 router.get("/all", getProduct);
 router.get("/:id", getProductById);
 router.put("/update_product/:id", updateProduct)

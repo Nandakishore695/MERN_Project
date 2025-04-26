@@ -12,7 +12,6 @@ const application = express();
 application.use(bodyParser.json());
 dotenv.config();
 
-
 // Start Server
 application.listen(process.env.PORT_NUMBE, () => { console.log(`Server started on port ${process.env.PORT_NUMBE}`); });
 
@@ -21,13 +20,14 @@ mongoose.connect(process.env.MONGOOSE_CONNECTION_URL, { dbName: "Mern_E-Commerce
   .then(() => { console.log("Mongoose Connected"); })
   .catch((error) => { console.log("MongoDB Connection Error:", error); });
 
-// const corsOptions = 
+// cors
 application.use(cors({
   origin: true,
   methods: ['GET', "POST", "DELETE"],
   credentials: true
 }));
 
+// Application Routes
 application.use("/api/user", userRouter);
 application.use("/api/product", productRoutes);
 application.use("/api/carts", cartRouters);

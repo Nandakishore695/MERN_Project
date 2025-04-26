@@ -32,7 +32,7 @@ export const login = async (req, res) => {
       return res.json({ message: "Wrong Password Enter!", success: false });
     }
     else {
-      const token = jwt.sign({ _id: UserRegister._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
+      const token = jwt.sign({ _id: UserRegister._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
       res.cookie("token", token, {
         httpOnly: true, 
         // secure: process.env.NODE_ENV === "production",
