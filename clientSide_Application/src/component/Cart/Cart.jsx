@@ -31,7 +31,6 @@ const Cart = () => {
 
     const handleDeleteCart = async (id) => {
         try {
-            debugger
             const response = await axios.delete(`${apiUrl}/carts/deleteCart/${id}`, {headers: {"Content-Type": "application/json"},withCredentials: true,});
             if (response.data.success === true) {
                 toast.success(response.data.message);
@@ -45,9 +44,10 @@ const Cart = () => {
     
     const handleClearCart = async () => {
         try {
-            const response = await axios.delete(`${apiUrl}/carts/clearAll`, {headers: {"Content-Type": "application/json"},withCredentials: true,});
+            const response = await axios.delete(`${apiUrl}/carts/clearCart`, {headers: {"Content-Type": "application/json"},withCredentials: true,});
             if (response.data.success === true) {
                 toast.success(response.data.message);
+                getCarts();
             }
         } catch (error) {
             console.log(error);
