@@ -26,7 +26,7 @@ function Product() {
         { headers: { "Content-Type": "application/json" } },
         { withCredentials: true }
       );
-      setApiData(apiResponse.data);
+      setApiData([...apiResponse.data].reverse());
     } catch (error) {
       // console.log(error.response.data.message);
     }
@@ -42,17 +42,13 @@ function Product() {
       image: item.image,
     };
     try {
-      const apiResponse = await axios.post(
+      await axios.post(
         `${apiUrl}/carts/cartAdd`,
         data,
         { headers: { "Content-Type": "application/json" } },
         { withCredentials: true }
       );
       toast.success("Item Added");
-      console.log(apiResponse.data);
-
-      // console.log(apiResponse.data.length);
-      // dispatch(incrementQuantity(item._id));
     } catch (error) {
       console.log(error);
     }

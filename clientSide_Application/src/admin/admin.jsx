@@ -15,8 +15,9 @@ const Admin = () => {
   }
   return (
     <div>
-      <button onClick={() => handleUserList("addproduct")}>Amin Add Product</button>
+      <button onClick={() => handleUserList("addproduct")}>Admin Add Product</button>
       <button onClick={() => handleUserList("allUser")}>All User Detail</button>
+      <button onClick={() => handleUserList("allUser")}>Manage Product</button>
     </div>
   )
 }

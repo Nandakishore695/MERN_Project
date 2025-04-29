@@ -51,7 +51,8 @@ const AddProduct = () => {
     
             if (response.data.success === true) {
                 toast.success(response.data.message);
-                navigate("/"); // fixed typo: navigator → navigate
+                // navigator("/"); // fixed typo: navigator → navigate
+                getProduct()
             }
         } catch (error) {
             toast.error(error.response?.data?.message || error.message);
@@ -63,7 +64,7 @@ const AddProduct = () => {
         try {
             const apiResponse = await axios.get(`${apiUrl}/product/all `, { headers: { "Content-Type": "application/json" } },
                 { withCredentials: true });
-            setRowData(apiResponse.data);
+            setRowData([...apiResponse.data].reverse());
         } catch (error) {
             // console.log(error.response.data.message);
         }

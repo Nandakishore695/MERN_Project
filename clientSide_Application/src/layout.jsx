@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router";
 import toast, { Toaster } from 'react-hot-toast';
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from './component/ReducComponent/feature/authSlice';
+import axios from "axios";
 
 function Layout() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const cartItems = useSelector(state => state.cart.cartItems.length);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [searchValue, setSearchValue] = useState("");
+    const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
     const handleLogout = () => {
         toast('Successfully Logout!', { icon: '👏', });
@@ -20,6 +23,30 @@ function Layout() {
     const handleProfile = () => { navigate("/profile") }
     const handleAdmin = () => { navigate("/admin") }
 
+    const handleSearchGlobal = (event) => {
+        const searchValue = event.target.value.toLowerCase().trim();
+        setSearchValue(searchValue);
+
+    }
+    const handleSubmitSearch = async (event) =>{
+        event.preventDefault();
+        console.log(searchValue);
+        if(!searchValue){
+           return toast.error("Please enter a search term");
+        }
+        else{
+           const apiResponse = await axios.get(
+                `${apiUrl}/product/searchProduct/${searchValue}`,
+                { headers: { "Content-Type": "application/json" } },
+                { withCredentials: true }
+              );
+            //   dispatch(productSearchView());
+            navigate(`/search/${searchValue}`);
+            setSearchValue("");
+            toast.success("Search successfully")
+        }
+        
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-success shadow-sm">
@@ -49,8 +76,10 @@ function Layout() {
                                 placeholder="Search for products"
                                 name='search'
                                 autoComplete='off'
+                                value={searchValue}
+                                onChange={handleSearchGlobal}
                             />
-                            <button className="btn btn-outline-light  ms-2" type="submit">
+                            <button className="btn btn-outline-light  ms-2" type="submit" onClick={handleSubmitSearch}>
                                 <FaSearch />
                             </button>
                         </form>

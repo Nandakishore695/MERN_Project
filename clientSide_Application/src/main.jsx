@@ -24,11 +24,12 @@ createRoot(document.getElementById('root')).render(
       <Layout />
       <Routes>
         <Route path="/" element={<Product />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="profile" element={<UserProfile />} />
         <Route path="product" element={<Product />} />
         <Route path="product/:id" element={<ViewProduct />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="profile" element={<UserProfile />} />
+        <Route path="search/:searchValue" element={<ViewProduct />} />
         <Route path="cart" element={<Cart />} />
         <Route path="shippingAddress" element={<ShippingAddress />} />
         <Route path="checkoutAddress" element={<CheckoutAddress />} />
