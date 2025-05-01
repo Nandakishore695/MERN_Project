@@ -9,8 +9,12 @@ const ViewProduct = () => {
   const apiUrl = import.meta.env.VITE_API_LOCALHOST_URL;
 
   useEffect(() => {
-    getProductById();
-  }, [])
+    if(params.id){
+      getProductById();
+    }else if(params.searchValue){
+      getSearchProduct();
+    }
+  }, [params.searchValue])
 
   const getProductById = async () => {
     try {
@@ -43,11 +47,19 @@ const ViewProduct = () => {
     }
   };
 
+  const getSearchProduct = async () =>{
+    try {
+      const apiResponse = await axios.get(`${apiUrl}/product/searchProduct/${params.searchValue}`, { headers: { "Content-Type": "application/json" } },);
+      setApiData(apiResponse.data.response[0]);
+        } catch (error) {
+      toast.error({message: error.message, success: false});
+    }
+  }
+  
   return (
     <>
       <div className='d-flex justify-content-center my-5'>
               <Toaster position="top-center" reverseOrder={false} />
-        
         <div className="card ">
           <img src={apiData.image} alt={apiData.name} width={200} />
         </div>

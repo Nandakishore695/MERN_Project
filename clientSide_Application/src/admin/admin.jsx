@@ -6,20 +6,22 @@ const Admin = () => {
 
   const handleUserList = (type) => {
     if (type === "allUser") {
-      navigate("/admin/alluser")
+      navigate("/admin/alluser");
     }
     else if (type === "addproduct") {
-      navigate("/admin/addproduct")
+      navigate("/admin/addproduct");
 
+    }
+    else if (type === "manageProduct") {
+      navigate("/admin/manageproduct");
     }
   }
   return (
     <div>
       <button onClick={() => handleUserList("addproduct")}>Admin Add Product</button>
       <button onClick={() => handleUserList("allUser")}>All User Detail</button>
-      <button onClick={() => handleUserList("allUser")}>Manage Product</button>
+      <button onClick={() => handleUserList("manageProduct")}>Manage Product</button>
     </div>
   )
 }
-
 export default Admin;

@@ -53,7 +53,7 @@ export const searchProduct = async(req, res) =>{
     const itemSearch = req.params.item;    
     try {
         const response = await Product.find({$or:[{name: {$regex: itemSearch, $options: "i" }}]});
-        res.json({ message: "Product Found", success: true, response});
+        res.json({ message: "Product Founded", success: true, response});
     } catch (error) {
         res.json({ message: error.message, success: false })
     }

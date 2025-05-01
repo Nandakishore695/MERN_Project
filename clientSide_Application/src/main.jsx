@@ -17,6 +17,7 @@ import { store } from './component/ReducComponent/store.jsx';
 import Admin from './admin/admin.jsx';
 import AllUser from './admin/AllUser.jsx';
 import AddProduct from './admin/CurdProduct.jsx';
+import AmangeProduct from './admin/AmangeProduct.jsx';
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -36,6 +37,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="admin" element={<Admin />} />
         <Route path="admin/alluser" element={<AllUser />} />
         <Route path="admin/addproduct" element={<AddProduct />} />
+        <Route path="admin/manageproduct" element={<AmangeProduct/>} />
       </Routes>
     </BrowserRouter>
   </Provider>
